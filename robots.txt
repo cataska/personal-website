@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /keybase.txt
