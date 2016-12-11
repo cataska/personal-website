@@ -1,0 +1,72 @@
+==================================================================
+https://keybase.io/lovecankill
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://lovecankill.com
+  * I am lovecankill (https://keybase.io/lovecankill) on keybase.
+  * I have a public key with fingerprint DD42 91A8 D4CF 41C7 6753  B843 04E6 FF04 9423 FF7C
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010127723453c05628ad732e9b9e8965e5c6826c571a552c918b7047864ccd236a680a",
+            "fingerprint": "dd4291a8d4cf41c76753b84304e6ff049423ff7c",
+            "host": "keybase.io",
+            "key_id": "04e6ff049423ff7c",
+            "kid": "010127723453c05628ad732e9b9e8965e5c6826c571a552c918b7047864ccd236a680a",
+            "uid": "e7bff2bf69dabaca78d8b84300052719",
+            "username": "lovecankill"
+        },
+        "service": {
+            "hostname": "lovecankill.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1481425691,
+    "expire_in": 157680000,
+    "prev": "a2037cff567100754c32b51c478808f529852580c76fe5b43c028578e77d0853",
+    "seqno": 6,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owGtUm1QVFUYhmUzYARRU4NhCi+bpu6w9+vcc+822Ic6lkg6TiRZsN6Pc9k7LLvL
+3Q9ghCwNtFlnRAOFLEbAycYhEU2LCmIExAFkGoiBgUoJcXQEBD+mQobbXapf/u38
+OXPO+zzPed7nvKVRYSGGUOMtzViWqBWGdt0RQtK3toI9mOCSCjDrHiwbzW/IISGP
+15atSJgVwwmcICEkKRpQIg4YkuUlSJGIEzjEcgxAQGRYkhEBJHgASJEjWAHiNGQZ
+WhQlkmJ4hsV5zIzJijMLqW5VcXp1WUmiSY7gWYkWZZoQIQMBJbA0hdOIkWWc5miS
+kmUo6kS7yxNk6OYE3oOSFJd+px9s/9h7Ev8/+/bNyyEoyDIpyAwn8QIv8pCV2Hm/
+OA5ISHBBoAepTj4H6WiHy49E3pmtOBxYkRnTC35FRMFsg808CUoSXTm6glt1eV2i
+y6EX7V6v2xrkegvcQXAeEmz/ytgExSnpYeoEP1I9isuJWQkdKXqVoC5BswRNAoYj
+zBjKdysqsilBBIB6Q/oKPoP8uiRPZuAUFGUZMJDAcQhokSIFQIh6CCzOyoDkWEAC
+Ftd/R0ZAoPUcSRZAFkEo4SygsGBnuU4XZmV0n3yWrulRspy816cirCjyY0O8MSTU
+ELLgKUNwzEIiI2L+m72rZYs0/3eHBk5meOvXbL2enrM+J1XccfFY1L3XqlIfp8Lb
+hZ5jprky0/BwcdSSj6otG+bUF09VBNSNBzO0jrHw3Btrlu1epZ1+uT0plsueY7vh
+1Ix8ujL2veZzf5oWPTClbHZMbQ7UNi/+oPqBMN3n3nlt4p2KLxpbXhiZbEhx30w/
+UB2tXA44Gu8vjULfNKja0TD8Bua7WvV6XNPvb/7StunCh98WJFypW+EfirGYnj2R
+nLjk4dmiiHMxNV+/YVs7lPfZ7YHZL8czmU0XV9zLX/lX8qdyV9gzEzZ75sSP/YOj
+F/ZHlB2ZkrU8ybm3Mz88b3U3tlQ0xY4DQ0Pc9bEj4ZmB9oQzM+nrS14Vaovrj4c2
+tjs6ZuHEKylFj1oe+++0jfYs7Io7utx+sPlsi3937zKl87m0M7PIckv9ITm6YiDR
+jvpKIms31I0e7n44tr0x/vDeHmjUKvsWLKzbN/nIsv9789BvP53Y9fYVZ3mgPXRx
+Z+ela38Eas5PDrT64lvv+pgxc+LIbE5Jgjz7+aWs6R1G7VDv3bDCtiaf9tVbA7ml
+RZbnt5jL+cGa3ujwU+P77Ea1ia96N3Pmk21Yf8fKvKr6RaxkKI+vW5fb0z1c+PP9
+1WmDNzssL40hNqUzfF3syW3c+2la8tpVbZWZ56fpjd0NacUpQ/3WX73HR3ay1IHt
+Wy63Zzy9a6h0+d8=
+=OIJm
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/lovecankill
+
+==================================================================
