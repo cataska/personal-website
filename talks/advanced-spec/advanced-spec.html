@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2017-01-23 Mon 22:44 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="lovecankill" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/clojure-logo.png"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/clojure-logo.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgafe00b8" class="outline-2">
+<h2 id="orgafe00b8">前情提要</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org1fb3ed5" class="outline-2">
+<h2 id="org1fb3ed5">clojure.spec</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul class="build">
+<li>Clojure 1.9 的新功能</li>
+<li>Spec 是一組描述資料何者正確的規則</li>
+<li>驗證資料結構類型</li>
+<li>任意組合</li>
+<li>測試資料生成</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/clojure-logo.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orga96af95" class="outline-2">
+<h2 id="orga96af95">本次大綱</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgcf26136" class="outline-2">
+<h2 id="orgcf26136">大綱</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>Sequences</li>
+<li>Entity Map</li>
+<li>Validation</li>
+<li>Instrumentaion and Testing</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/clojure-logo.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgc9e055d" class="outline-2">
+<h2 id="orgc9e055d">Sequences</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orga069285" class="outline-2">
+<h2 id="orga069285">使用正規表達式，建立 spec 驗證連續資料</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li><code>cat</code></li>
+<li><code>*</code></li>
+<li><code>+</code></li>
+<li><code>?</code></li>
+<li><code>alt</code></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org6aafabd" class="outline-2">
+<h2 id="org6aafabd">cat</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+建立資料依序符合 predicates 的 spec
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/def ::ingredient (s/cat :quantity number? :unit keyword?))
+(s/conform ::ingredient [2 :teaspoon])
+;;=&gt; {:quantity 2, :unit :teaspoon}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org8f69310" class="outline-2">
+<h2 id="org8f69310">*</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+建立資料符合 predicate 零或多次的 spec
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/conform (s/* keyword?) []) ;;=&gt; []
+(s/conform (s/* keyword?) [:a]) ;;=&gt; [:a]
+(s/conform (s/* keyword?) [:a :b]) ;;=&gt; [:a :b]
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgbbd9319" class="outline-2">
+<h2 id="orgbbd9319">+</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+建立資料符合 predicate 一或多次的 spec
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/conform (s/+ keyword?) []) ;;=&gt; :clojure.spec/invalid
+(s/conform (s/+ keyword?) [:a]) ;;=&gt; [:a]
+(s/conform (s/+ keyword?) [:a :b]) ;;=&gt; [:a :b]
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org6cdfe10" class="outline-2">
+<h2 id="org6cdfe10">?</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+建立資料符合 predicate 零或一次的 spec
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/conform (s/? keyword?) []) ;;=&gt; nil
+(s/conform (s/? keyword?) [:a]) ;;=&gt; :a
+(s/conform (s/? keyword?) [:a :b]) ;;=&gt; :clojure.spec/invalid
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org3ba49ea" class="outline-2">
+<h2 id="org3ba49ea">alt</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+建立資料符合多組 predicates 中其一的 spec
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/def ::config (s/*
+                  (s/cat :prop string?
+                         :val  (s/alt :s string? :b boolean?))))
+(s/conform ::config ["-server" "foo" "-verbose" true "-user" "joe"])
+;;=&gt; [{:prop "-server", :val [:s "foo"]}
+;;    {:prop "-verbose", :val [:b true]}
+;;    {:prop "-user", :val [:s "joe"]}]
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/clojure-logo.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org20c3098" class="outline-2">
+<h2 id="org20c3098">Entity Map</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgb9bb29b" class="outline-2">
+<h2 id="orgb9bb29b">定義給 Map 使用的 spec</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+<code>s/keys</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(def email-regex #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$")
+(s/def ::email-type (s/and string? #(re-matches email-regex %)))
+
+(s/def ::acctid int?)
+(s/def ::first-name string?)
+(s/def ::last-name string?)
+(s/def ::email ::email-type)
+
+(s/def ::person (s/keys :req [::first-name ::last-name ::email]
+                        :opt [::phone]))
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org27324bc" class="outline-2">
+<h2 id="org27324bc">使用定義好的 spec 來驗證 Map</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/valid? ::person
+  {::first-name "Elon"
+   ::last-name "Musk"
+   ::email "elon@example.com"}) ;;=&gt; true
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org92d96fc" class="outline-2">
+<h2 id="org92d96fc">使用定義好的 spec 來驗證 Map</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/explain ::person
+  {::first-name "Elon"})
+;;=&gt; val: #:spec-talks.advanced{:first-name "Elon"}
+;;   fails spec: :spec-talks.advanced/person
+;;   predicate: (contains? % :spec-talks.advanced/last-name)
+;;
+;;   val: #:spec-talks.advanced{:first-name "Elon"}
+;;   fails spec: :spec-talks.advanced/person
+;;   predicate: (contains? % :spec-talks.advanced/email)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org0d854d5" class="outline-2">
+<h2 id="org0d854d5">使用定義好的 spec 來驗證 Map</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/explain ::person
+  {::first-name "Elon"
+   ::last-name "Musk"
+   ::email "n/a"})
+;;=&gt; In: [:spec-talks.advanced/email]
+;;   val: "n/a"
+;;   fails spec: :spec-talks.advanced/email-type
+;;   at: [:spec-talks.advanced/email]
+;;   predicate: (re-matches email-regex %)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/clojure-logo.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org1014349" class="outline-2">
+<h2 id="org1014349">Validation</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgde94cad" class="outline-2">
+<h2 id="orgde94cad">驗證資料</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+使用 <code>s/assert</code> 驗證資料是否符合 spec
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(defn person-name
+  [person]
+  (let [p (s/assert ::person person)]
+    (str (::first-name p) " " (::last-name p))))
+
+(s/check-asserts true)
+(person-name 100)
+;;=&gt; ExceptionInfo Spec assertion failed
+;;   val: 100 fails predicate: map?
+;;   :clojure.spec/failure  :assertion-failed
+;;   #:clojure.spec{:problems [{:path [], :pred map?, :val 100, :via [], :in []}],
+;;                  :failure :assertion-failed}
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgf7bd364" class="outline-2">
+<h2 id="orgf7bd364">驗證函數 (1)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+使用 pre/post 與 clojure.spec 驗證參數與返回值
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(defn person-name
+  [person]
+  {:pre [(s/valid? ::person person)]
+   :post [(s/valid? string? %)]}
+  (str (::first-name person) " " (::last-name person)))
+
+(person-name 42)
+;;=&gt; java.lang.AssertionError:
+;;   Assert failed: (s/valid? :spec-talks.advanced/person person)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/clojure-logo.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgac6fdbc" class="outline-2">
+<h2 id="orgac6fdbc">Instrumentaion and Testing</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org48ee81a" class="outline-2">
+<h2 id="org48ee81a">使用之前</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+將 <code>clojure.spec.test</code> 加入至 namespace
+</p>
+
+<p>
+第一種方法：
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(require '[clojure.spec.test :as stest])
+</pre>
+
+</div>
+
+<p>
+第二種方法：
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(ns my.ns
+  (:require [clojure.spec.test :as stest]))
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org403f40c" class="outline-2">
+<h2 id="org403f40c">建立描述函數的 spec</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+使用 <code>s/fdef</code> 建立函數 spec
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(s/fdef clojure.core/symbol
+  :args (s/alt :separate (s/cat :ns string? :n string?)
+               :str string?
+               :sym symbol?)
+  :ret symbol?)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org7ea7bce" class="outline-2">
+<h2 id="org7ea7bce">驗證函數 (2)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+使用 <code>stest/instrument</code> 驗證參數
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(stest/instrument `symbol)
+(symbol 'foo)
+;;=&gt; foo
+(symbol 1)
+;;=&gt; ExceptionInfo Call to #'clojure.core/symbol did not conform to spec:
+;;   In: [0] val: 1 fails at: [:args :separate :ns] predicate: string?
+;;   In: [0] val: 1 fails at: [:args :str] predicate: string?
+;;   In: [0] val: 1 fails at: [:args :sym] predicate: symbol?
+;;   :clojure.spec/args  (1)
+;;   :clojure.spec/failure  :instrument
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org2f77e28" class="outline-2">
+<h2 id="org2f77e28">驗證函數 (3)</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+使用 <code>stest/check</code> 自動產生符合 spec 的參數，來驗證返回值
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="clojure">
+(stest/check `symbol)
+;;=&gt; ({:spec #object[...],
+;;     :clojure.spec.test.check/ret {:result true,
+;;                                   :num-tests 1000,
+;;                                   :seed 1484554638749},
+;;     :sym clojure.core/symbol})
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org1ac2445" class="outline-2">
+<h2 id="org1ac2445">總結</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul class="build">
+<li>使用 Regex op 建立 spec 驗證 Sequences</li>
+<li>使用 keys 建立 spec 驗證 Map</li>
+<li>使用 fdef 建立函數的 spec</li>
+<li>使用 intrument 驗證參數</li>
+<li>使用 check 驗證返回值</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgad5a4b8" class="outline-2">
+<h2 id="orgad5a4b8">參考資料</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li><a href="http://clojure.org/guides/spec">spec Guide</a></li>
+<li><a href="http://arnebrasseur.net/talks/2016-clojutre/">Introduction clojure.spec</a></li>
+<li><a href="https://juxt.pro/blog/posts/parsing-routes-clojure-spec.html">Parsing routes with clojure spec</a></li>
+<li><a href="http://gigasquidsoftware.com/blog/2016/07/18/genetic-programming-with-clojure-dot-spec/">Genetic Programming With clojure.spec</a></li>
+<li><a href="http://blog.klipse.tech/clojure/2016/05/30/spec.html">Clojure 1.9 introduces clojure.spec: tutorial with live coding examples</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLZdCLR02grLrju9ntDh3RGPpWSWBvjwXg">Clojure spec Screencast Series</a></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" thank-you-slide segue nobackground" style="background-image: url(nil)">
+<aside class="gdbar right"><img src="images/clojure-logo.png"></aside><article class="flexbox vleft auto-fadein" id="text-">
+<h2>
+  <p>Thank you</p>
+</h2>
+<br>
+<p class="auto-fadein" data-config-contact>
+</p>
+</article>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides> 
+<script>
+var _gaq = _gaq || []; 
+_gaq.push(['_setAccount', 'UA-86904776-4']);
+_gaq.push(['_trackPageview']); 
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body> 
+
+</html>
